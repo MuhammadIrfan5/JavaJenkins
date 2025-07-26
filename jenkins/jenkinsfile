@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     environment {
+        PATH = "usr/local/bin/docker:${env.PATH}"
         JAVA_HOME = "/Users/muhammadirfan/.sdkman/candidates/java/current"
         PATH = "${JAVA_HOME}/bin:${env.PATH}"
         IMAGE_NAME = "my-java-app"
@@ -22,20 +23,6 @@ pipeline {
                     // Build the project using Gradle wrapper
                     sh './gradlew clean build --no-daemon'
                 }
-        }
-        
-        stage('Check Docker'){
-            steps {
-                    sh 'docker --version'
-            }
-        }
-
-        stage('Docker Build') {
-            steps {
-                script {
-                    docker.build("${IMAGE_NAME}:latest")
-                }
-            }
         }
 
 
