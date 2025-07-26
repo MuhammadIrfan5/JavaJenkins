@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Clone') {
+            steps {
+                git 'https://github.com/MuhammadIrfan5/JavaJenkins.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                dir('app') {
+                    sh './gradlew build'
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'No tests yet!'
+            }
+        }
+
+        stage('Docker Build') {
+            steps {
+                script {
+                    docker.build("my-java-app:latest", ".")
+                }
+            }
+        }
+    }
+}
