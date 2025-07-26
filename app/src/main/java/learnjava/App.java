@@ -8,7 +8,11 @@ public class App {
         return "Hello World! Its Gradle and Jenkins integration.";
     }
 
+    public String getName(String name) {
+        return "Hello " + name + "! Its Gradle and Jenkins integration.";
+    }
+
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        System.out.println(new App().getName("Muhammad Irfan!"));
     }
 }

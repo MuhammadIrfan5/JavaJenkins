@@ -1,33 +1,48 @@
 pipeline {
     agent any
 
+    environment {
+        // Optional: name your Docker image
+        IMAGE_NAME = 'my-java-app'
+    }
+
     stages {
-        stage('Clone') {
+        stage('Checkout') {
             steps {
-                git 'https://github.com/MuhammadIrfan5/JavaJenkins.git'
+                // Pull code from GitHub
+                checkout scm
             }
         }
 
-        stage('Build') {
+        stage('Gradle Build') {
             steps {
-                dir('app') {
-                    sh './gradlew build'
+                    // Make sure Gradle wrapper is executable
+                    sh 'chmod +x ./gradlew'
+                    // Build the project using Gradle wrapper
+                    sh './gradlew clean build --no-daemon'
                 }
-            }
-        }
-
-        stage('Test') {
-            steps {
-                echo 'No tests yet!'
-            }
         }
 
         stage('Docker Build') {
             steps {
                 script {
-                    docker.build("my-java-app:latest", ".")
+                    docker.build("${env.IMAGE_NAME}:latest")
                 }
             }
+        }
+
+
+    }
+
+    post {
+        always {
+            echo 'Cleaning up...'
+        }
+        success {
+            echo '✅ Build completed successfully!'
+        }
+        failure {
+            echo '❌ Build failed!'
         }
     }
 }

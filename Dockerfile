@@ -1,4 +1,4 @@
-FROM openjdk:17-jdk-alpine
+FROM openjdk:17-jdk-slim
 WORKDIR /app
 COPY ./app /app
 RUN ./gradlew build --no-daemon || ./gradlew wrapper && ./gradlew build --no-daemon
