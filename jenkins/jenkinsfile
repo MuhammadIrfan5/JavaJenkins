@@ -2,8 +2,9 @@ pipeline {
     agent any
 
     environment {
-        // Optional: name your Docker image
-        IMAGE_NAME = 'my-java-app'
+        JAVA_HOME = "/Users/muhammadirfan/.sdkman/candidates/java/current"
+        PATH = "${JAVA_HOME}/bin:${env.PATH}"
+        IMAGE_NAME = "my-java-app"
     }
 
     stages {
