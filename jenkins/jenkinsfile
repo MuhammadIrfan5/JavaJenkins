@@ -24,6 +24,21 @@ pipeline {
                     sh './gradlew clean build --no-daemon'
                 }
         }
+        
+       /* stage('Check Docker'){
+           steps {
+                sh 'which docker'
+                sh 'docker --version'
+            }
+        }
+
+        stage('Docker Build') {
+            steps {
+                script {
+                    docker.build("${IMAGE_NAME}:latest")
+                }
+            }
+        } */
 
 
     }
