@@ -5,7 +5,7 @@ package learnjava;
 
 public class App {
     public String getGreeting() {
-        return "Hello World!";
+        return "Hello World! Its Gradle and Jenkins integration.";
     }
 
     public static void main(String[] args) {
